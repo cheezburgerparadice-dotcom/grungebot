@@ -1,0 +1,10 @@
+{
+  "name": "drum-bus",
+  "description": "Punchy grunge drum bus with room tone and subtle tape warmth.",
+  "chain": [
+    { "type": "eq", "note": "Cut 250Hz slightly for clarity" },
+    { "type": "compressor", "ratio": 4, "threshold": "-12dB" },
+    { "type": "saturation", "drive": 18, "mix": 0.35 },
+    { "type": "reverb", "send": 0.18, "decay": "1.2s" }
+  ]
+}

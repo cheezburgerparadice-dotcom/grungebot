@@ -1,0 +1,10 @@
+{
+  "name": "guitar-bus",
+  "description": "Dirty guitar stack with grit, midrange push, and clipped transient flavor.",
+  "chain": [
+    { "type": "gain", "amount": 3 },
+    { "type": "eq", "note": "Boost 2kHz for bite, cut 350Hz if muddy" },
+    { "type": "distortion", "drive": 25, "mix": 0.42 },
+    { "type": "cab", "tone": "smoky" }
+  ]
+}

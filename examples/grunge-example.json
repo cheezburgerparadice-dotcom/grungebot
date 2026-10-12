@@ -1,0 +1,22 @@
+{
+  "title": "Static in the Hallway",
+  "tempo": 128,
+  "key": "E minor",
+  "structure": ["Verse 1", "Chorus", "Verse 2", "Chorus", "Bridge", "Final Chorus"],
+  "lyric_excerpt": [
+    "The fluorescent buzz keeps chewing on my name",
+    "I drag my shoes through the same old drain",
+    "The room hums like a broken signal",
+    "I keep my teeth clenched and call it grace"
+  ],
+  "guitar": {
+    "riff": "Em - C - G - D",
+    "feel": "Palm-muted verse rhythm, dirty chorus lead",
+    "note": "Let the top string ring at the end of each phrase"
+  },
+  "drums": {
+    "verse": "Kick on 1 and 3, snare on 2 and 4, hats on 8ths",
+    "chorus": "Louder snare, more kick accents, crash on 4 after the fill",
+    "fill": "Toms rising into the chorus"
+  }
+}
