@@ -1,51 +1,166 @@
-const examples = {
-  full: 'Write a grunge song about burnout, a dead-end job, and a lonely apartment at 3AM.',
-  lyrics: 'Write a verse about the fluorescent hum in a dead office and the feeling of being stuck.',
-  guitar: 'Write a gritty E minor riff with palm-muted verse rhythm and a dirty chorus lead.',
-  drums: 'Give me a simple punk-grunge drum groove with punchy snare, tight hats, and a tom fill into the chorus.',
-};
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap");
 
-const ideaField = document.querySelector('#idea');
-const resultField = document.querySelector('#result');
-const form = document.querySelector('#generator-form');
-const modeButtons = document.querySelectorAll('.mode-btn');
-let activeMode = 'full';
-
-function setMode(mode) {
-  activeMode = mode;
-  modeButtons.forEach((button) => {
-    button.classList.toggle('active', button.dataset.mode === mode);
-  });
-  ideaField.value = examples[mode];
+:root {
+  --bg: #0a0a0a;
+  --panel: #141414;
+  --panel-alt: #1b1b1b;
+  --line: rgba(255, 255, 255, 0.12);
+  --text: #f3f3f3;
+  --muted: #b9b9b9;
+  --accent: #d65a35;
+  --accent-2: #ffb366;
 }
 
-function localGenerator(mode, idea) {
-  const prompt = idea || 'gritty, emotional, live-feel grunge';
-
-  if (mode === 'lyrics') {
-    return `Title: Static in the Hallway\n\nVerse 1\nThe fluorescent buzz keeps chewing on my name\nI drag my walk home through the same old rain\nThe coffee tastes like rust and cheap regret\nI keep my panic in a jar by the sink\n\nChorus\nStatic in the hallway\nMy hands are shaking, my teeth are steel\nStatic in the hallway\nI keep trying to feel\n\nTheme: ${prompt}`;
-  }
-
-  if (mode === 'guitar') {
-    return `Key: E minor\nTempo: 128 BPM\n\nRiff:\nEm - C - G - D\nPalm-muted verse rhythm, low-string power chords\nLet the top string ring in the chorus\nUse a dirty slide lead at the end of each phrase\n\nTone note: clip the mids lightly and let the amp feedback a bit.\n\nTheme: ${prompt}`;
-  }
-
-  if (mode === 'drums') {
-    return `Tempo: 128 BPM\nStyle: punk-grunge groove\n\nVerse pattern:\nKick on 1 and 3\nSnare on 2 and 4\nHats: closed 8ths with occasional open on phrase ends\nToms: small fill before the chorus\n\nChorus pattern:\nAdd extra kick accents and a louder snare\nCrash on beat 4, then a tight tom fill into bar 1\n\nTheme: ${prompt}`;
-  }
-
-  return `Title: Broken Signal\nTempo: 128 BPM\nKey: E minor\n\nVerse 1\nThe city leaks through my window frame\nI hold my breath like it could save me\nThe room hums, the walls close in\nI keep my teeth clenched and call it normal\n\nChorus\nBroken signal, static heart\nI keep running from the same old start\nNo clean exit, no clean end\nJust a dirty echo and a tired friend\n\nGuitar: Em - C - G - D. Palm-muted verses, dirty lead chorus.\nDrums: tight snare, open hats, tom fill into the chorus.\n\nTheme: ${prompt}`;
+* {
+  box-sizing: border-box;
 }
 
-modeButtons.forEach((button) => {
-  button.addEventListener('click', () => setMode(button.dataset.mode));
-});
+html {
+  scroll-behavior: smooth;
+}
 
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const value = ideaField.value.trim();
-  const output = localGenerator(activeMode, value);
-  resultField.textContent = output;
-});
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+}
 
-setMode('full');
+.page-shell {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0 80px;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent-2);
+  letter-spacing: 0.16em;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 12px;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  letter-spacing: -0.06em;
+}
+
+.subhead {
+  color: var(--muted);
+  margin: 0;
+  max-width: 58ch;
+  line-height: 1.7;
+}
+
+.mode-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.mode-btn {
+  border: 1px solid var(--line);
+  background: var(--panel-alt);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.mode-btn.active {
+  background: var(--accent);
+  border-color: transparent;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+textarea {
+  width: 100%;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  resize: vertical;
+  color: var(--text);
+  font: inherit;
+  padding: 16px;
+  min-height: 160px;
+}
+
+.submit-btn {
+  margin-top: 18px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), #ef7d3b);
+  color: #fff;
+  padding: 14px 20px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.result pre,
+.example-block pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  line-height: 1.7;
+  color: #f4efe9;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.links a {
+  color: var(--accent-2);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.examples,
+.about {
+  margin-top: 24px;
+}
+
+.example-block + .example-block {
+  margin-top: 20px;
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 18px, 1100px);
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
+}
