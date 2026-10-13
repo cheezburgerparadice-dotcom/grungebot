@@ -1,47 +1,166 @@
-# GrungeBot
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
 
-A grunge-inspired songwriting assistant for raw lyrics, guitar riffs, and drum patterns.
+:root {
+  --bg: #0a0a0a;
+  --panel: #141414;
+  --panel-alt: #1b1b1b;
+  --line: rgba(255,255,255,0.12);
+  --text: #f3f3f3;
+  --muted: #b9b9b9;
+  --accent: #d65a35;
+  --accent-2: #ffb366;
+}
 
-## Features
-- Generate lyrics, guitar riffs, and drum grooves
-- Live website UI with a fast prompt flow
-- Offline fallback generation when no API key is configured
-- Example pages and preset APIs
-- Ready to extend with OpenAI or another LLM provider
+* {
+  box-sizing: border-box;
+}
 
-## Tech stack
-- Next.js
-- React
-- Node.js
+html {
+  scroll-behavior: smooth;
+}
 
-## Quick start
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
 
-1. Install dependencies:
-   npm install
+.page-shell {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0 80px;
+}
 
-2. Run the development server:
-   npm run dev
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
 
-3. Open:
-   http://localhost:3000
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent-2);
+  letter-spacing: 0.16em;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
 
-## Environment variables
+h1, h2, h3 {
+  margin-top: 0;
+}
 
-Optional:
-- OPENAI_API_KEY=your_key_here
+h1 {
+  margin-bottom: 12px;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  letter-spacing: -0.06em;
+}
 
-If no key is present, the app still works in local fallback mode.
+.subhead {
+  color: var(--muted);
+  margin: 0;
+  max-width: 58ch;
+  line-height: 1.7;
+}
 
-## Project structure
-- app/page.js — main generator UI
-- app/examples/page.js — sample output page
-- app/about/page.js — project overview
-- app/api/generate/route.js — generation endpoint
-- app/api/preset/route.js — preset API
-- lib/grunge.js — system prompt
-- system_prompt.txt — editable prompt file
-- presets/ — example DAW presets
-- examples/ — sample output JSON
+.mode-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
 
-## Notes
-This app is intentionally designed around original songwriting. It avoids copying existing lyrics or artist-specific vocals and instead focuses on the emotional and sonic spirit of grunge.
+.mode-btn {
+  border: 1px solid var(--line);
+  background: var(--panel-alt);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.mode-btn.active {
+  background: var(--accent);
+  border-color: transparent;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+textarea {
+  width: 100%;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  resize: vertical;
+  color: var(--text);
+  font: inherit;
+  padding: 16px;
+  min-height: 160px;
+}
+
+.submit-btn {
+  margin-top: 18px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), #ef7d3b);
+  color: #fff;
+  padding: 14px 20px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.result pre,
+.example-block pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  line-height: 1.7;
+  color: #f4efe9;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.links a {
+  color: var(--accent-2);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.examples,
+.about {
+  margin-top: 24px;
+}
+
+.example-block + .example-block {
+  margin-top: 20px;
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 18px, 1100px);
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
+}

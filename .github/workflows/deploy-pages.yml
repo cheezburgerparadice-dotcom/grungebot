@@ -1,0 +1,33 @@
+# GrungeBot
+
+A static GitHub Pages site for a grunge-inspired songwriting assistant.
+
+## What it does
+- Generates original lyrics
+- Generates guitar riff ideas
+- Generates drum groove ideas
+- Gives a rough, raw, live grunge feel
+
+## Local development
+
+1. Install dependencies:
+   npm install
+
+2. Run the site locally:
+   npm run dev
+
+3. Open:
+   http://localhost:3000
+
+## Build for GitHub Pages
+
+1. Run:
+   npm run build
+
+2. The built static files will appear in `dist/`
+
+3. Publish the `dist/` folder as a GitHub Pages site, or use GitHub Actions to deploy it.
+
+## Notes
+This version is intentionally static so it can run on GitHub Pages without a server backend.
+The generator uses a built-in local template system rather than a server-side LLM call.

@@ -1,0 +1,51 @@
+const examples = {
+  full: 'Write a grunge song about burnout, a dead-end job, and a lonely apartment at 3AM.',
+  lyrics: 'Write a verse about the fluorescent hum in a dead office and the feeling of being stuck.',
+  guitar: 'Write a gritty E minor riff with palm-muted verse rhythm and a dirty chorus lead.',
+  drums: 'Give me a simple punk-grunge drum groove with punchy snare, tight hats, and a tom fill into the chorus.',
+};
+
+const ideaField = document.querySelector('#idea');
+const resultField = document.querySelector('#result');
+const form = document.querySelector('#generator-form');
+const modeButtons = document.querySelectorAll('.mode-btn');
+let activeMode = 'full';
+
+function setMode(mode) {
+  activeMode = mode;
+  modeButtons.forEach((button) => {
+    button.classList.toggle('active', button.dataset.mode === mode);
+  });
+  ideaField.value = examples[mode];
+}
+
+function localGenerator(mode, idea) {
+  const prompt = idea || 'gritty, emotional, live-feel grunge';
+
+  if (mode === 'lyrics') {
+    return `Title: Static in the Hallway\n\nVerse 1\nThe fluorescent buzz keeps chewing on my name\nI drag my walk home through the same old rain\nThe coffee tastes like rust and cheap regret\nI keep my panic in a jar by the sink\n\nChorus\nStatic in the hallway\nMy hands are shaking, my teeth are steel\nStatic in the hallway\nI keep trying to feel\n\nTheme: ${prompt}`;
+  }
+
+  if (mode === 'guitar') {
+    return `Key: E minor\nTempo: 128 BPM\n\nRiff:\nEm - C - G - D\nPalm-muted verse rhythm, low-string power chords\nLet the top string ring in the chorus\nUse a dirty slide lead at the end of each phrase\n\nTone note: clip the mids lightly and let the amp feedback a bit.\n\nTheme: ${prompt}`;
+  }
+
+  if (mode === 'drums') {
+    return `Tempo: 128 BPM\nStyle: punk-grunge groove\n\nVerse pattern:\nKick on 1 and 3\nSnare on 2 and 4\nHats: closed 8ths with occasional open on phrase ends\nToms: small fill before the chorus\n\nChorus pattern:\nAdd extra kick accents and a louder snare\nCrash on beat 4, then a tight tom fill into bar 1\n\nTheme: ${prompt}`;
+  }
+
+  return `Title: Broken Signal\nTempo: 128 BPM\nKey: E minor\n\nVerse 1\nThe city leaks through my window frame\nI hold my breath like it could save me\nThe room hums, the walls close in\nI keep my teeth clenched and call it normal\n\nChorus\nBroken signal, static heart\nI keep running from the same old start\nNo clean exit, no clean end\nJust a dirty echo and a tired friend\n\nGuitar: Em - C - G - D. Palm-muted verses, dirty lead chorus.\nDrums: tight snare, open hats, tom fill into the chorus.\n\nTheme: ${prompt}`;
+}
+
+modeButtons.forEach((button) => {
+  button.addEventListener('click', () => setMode(button.dataset.mode));
+});
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const value = ideaField.value.trim();
+  const output = localGenerator(activeMode, value);
+  resultField.textContent = output;
+});
+
+setMode('full');
